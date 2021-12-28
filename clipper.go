@@ -11,6 +11,7 @@ var name = flag.String("n", "", "name of clipping (both file and field in file)"
 var author = flag.String("a", "", "author of thing (optional)")
 var category = flag.String("c", "Article", "category of thing (default is Article)")
 
+
 func check(e error) {
 	if e != nil {
 		panic(e)
@@ -20,8 +21,10 @@ func check(e error) {
 
 func main() {
 	flag.Parse()
-	fp := "/Users/connor.davenport/secondbrain/3 Resources/Unsorted"
-	f, err := os.Create(fp + "/" + *name + ".md")
+    homedir, err := os.UserHomeDir()
+    check(err)
+    homedir += "/secondbrain/3 Resources/Unsorted/"
+	f, err := os.Create(homedir + *name + ".md")
 	check(err)
 
 	defer f.Close()
@@ -39,5 +42,6 @@ func main() {
 	check(err)
 	_, err = w.WriteString("## Ratings/Comments\n\n")
 	check(err)
+
 	w.Flush()
 }
