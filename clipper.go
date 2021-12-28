@@ -11,19 +11,19 @@ var name = flag.String("n", "", "name of clipping (both file and field in file)"
 var author = flag.String("a", "", "author of thing (optional)")
 var category = flag.String("c", "Article", "category of thing (default is Article)")
 
-
 func check(e error) {
 	if e != nil {
 		panic(e)
 	}
 }
+
 // TODO: add error handling for missing name
 
 func main() {
 	flag.Parse()
-    homedir, err := os.UserHomeDir()
-    check(err)
-    homedir += "/secondbrain/3 Resources/Unsorted/"
+	homedir, err := os.UserHomeDir()
+	check(err)
+	homedir += "/secondbrain/3 Resources/Unsorted/"
 	f, err := os.Create(homedir + *name + ".md")
 	check(err)
 
